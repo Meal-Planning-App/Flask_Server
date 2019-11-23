@@ -5,7 +5,7 @@ import os, sys
 
 import urllib.request, json
 
-database = None;
+database = None
 
 with urllib.request.urlopen('https://api.myjson.com/bins/13jaom') as url:
     database = json.loads(url.read().decode())
@@ -31,4 +31,4 @@ def recipes_list():
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=8080, debug=True)
