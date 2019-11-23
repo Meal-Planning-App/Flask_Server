@@ -1,7 +1,16 @@
 from flask import Flask, request, jsonify
-from ml.GeneticAlgorithm import GeneticAlgorithm
+from ml.GeneticAlgorithm2 import GeneticAlgorithm
 
 import os, sys
+
+import urllib.request, json
+
+database = None;
+
+with urllib.request.urlopen('https://api.myjson.com/bins/13jaom') as url:
+    database = json.loads(url.read().decode())
+    # print(str(database).encode(sys.stdout.encoding, errors='replace'))
+    print(r'Database was loaded!!!')
 
 fileDir = os.path.dirname(os.path.abspath(__file__))
 
@@ -12,12 +21,12 @@ ga = GeneticAlgorithm()
 def hello():
     return fileDir + r"\ml\data.json"
 
-@app.route('/get_recipes', methods=['GET', 'POST'])    
+@app.route('/get_recipes', methods=['GET', 'POST'])
 def recipes_list():
     content = request.json["data"]
     data = []
     for i in range(len(content)):
-        _, data_dict = ga.run_algorithm(fileDir + r"\ml\data.json", content[str(i)])
+        _, data_dict = ga.run_algorithm(database, content[str(i)])
         data.append(data_dict)
     return jsonify(data)
 
