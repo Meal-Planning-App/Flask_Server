@@ -7,7 +7,7 @@ from ml.GeneticAlgorithm import DataLoader_Mixin
 
 class GeneticAlgorithm(DataLoader_Mixin):
     """ Genetic Algorithm class"""
-    def __init__(self, ind_size: int = 10):
+    def __init__(self, ind_size):
         super().__init__()
         self.ind_size = ind_size
         # 0, because ID needs to be stored
@@ -26,7 +26,7 @@ class GeneticAlgorithm(DataLoader_Mixin):
         self.toolbox.register("select", tools.selTournament, tournsize=3)
         self.toolbox.register("evaluate", self._evaluate)
 
-    def run_algorithm(self, loaded_data: str, json_file) -> dict():
+    def run_algorithm(self, loaded_data, json_file):
         super().data_load(loaded_data)
         super().model_input_load(json_file)
         pop = self.toolbox.population(n=100)[0]
@@ -85,7 +85,7 @@ class GeneticAlgorithm(DataLoader_Mixin):
             result_dict.append(self.data[id])
         return result_dict
 
-    def run_fake_algorithm(self, loaded_data: str, json_file) -> dict():
+    def run_fake_algorithm(self, loaded_data, json_file):
         super().data_load(loaded_data)
         super().model_input_load(json_file)
         keys = random.sample(list(self.data), self.meals_per_day)

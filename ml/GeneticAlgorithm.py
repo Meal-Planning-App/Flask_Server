@@ -9,7 +9,7 @@ class DataLoader_Mixin():
     def __init__(self):
         pass
 
-    def data_load(self, file_path: str, return_data: bool = False):
+    def data_load(self, file_path, return_data):
         self.data = file_path
 
     def model_input_load(self, json_file):
