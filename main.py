@@ -19,7 +19,7 @@ ga = GeneticAlgorithm()
 
 @app.route('/')
 def hello():
-    return fileDir + r"\ml\data.json"
+    return 'This is your python server'
 
 @app.route('/get_recipes', methods=['GET', 'POST'])
 def recipes_list():
@@ -31,4 +31,4 @@ def recipes_list():
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=8080, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
